@@ -24,25 +24,25 @@ This project presents an end-to-end AI-powered system for automating medical doc
 
 ### Key Achievements
 
-- ✅ **Hybrid NER System**: 86% F1-score combining transformers + rule-based methods
-- ✅ **Multi-Task Learning**: Simultaneous sentiment & intent classification
-- ✅ **100% Test Accuracy**: On synthetic dataset (with critical analysis of overfitting)
-- ✅ **Automated SOAP Notes**: Clinical documentation in standardized format
-- ✅ **Modular Pipeline**: Easy to customize and extend
+- **Hybrid NER System**: 86% F1-score combining transformers + rule-based methods
+- **Multi-Task Learning**: Simultaneous sentiment & intent classification
+- **100% Test Accuracy**: On synthetic dataset (with critical analysis of overfitting)
+- **Automated SOAP Notes**: Clinical documentation in standardized format
+- **Modular Pipeline**: Easy to customize and extend
 
 ### Technology Stack
 -------------------------------------------------------------------------------------
 | Component            | Technology                          | Purpose |
 |----------------------|-------------------------------------|------------------
-| **NER Model**        | BioBERT (d4data/biomedical-ner-all) | Medical entity extraction
+| NER Model            | BioBERT (d4data/biomedical-ner-all) | Medical entity extraction
 -------------------------------------------------------------------------------------
-| **Secondary NER**    | scispaCy (en_core_sci_md) |         |Rule-based pattern matching 
+| Secondary NER        | scispaCy (en_core_sci_md) |         |Rule-based pattern matching 
 -------------------------------------------------------------------------------------
-| **Sentiment/Intent** | Fine-tuned BioBERT                  | Patient emotion & intent classification 
+| Sentiment/Intent     | Fine-tuned BioBERT                  | Patient emotion & intent classification 
 -------------------------------------------------------------------------------------
-| **Framework**        | HuggingFace Transformers + PyTorch  | Deep learning infrastructure 
+| Framework            | HuggingFace Transformers + PyTorch  | Deep learning infrastructure 
 -------------------------------------------------------------------------------------
-| **NLP Tools**        | spaCy 3.7+                          | Pattern matching & text processing 
+| NLP Tools            | spaCy 3.7+                          | Pattern matching & text processing 
 
 -------------------------------------------------------------------------------------
 
@@ -772,6 +772,9 @@ def generate_soap_note(ner_results, summary, sentiment):
         }
 
     }
+ return soap
+```
+
 
 ##installation
 git clone https://github.com/<your-username>/<repo-name>.git
@@ -788,6 +791,3 @@ python -m spacy download en_core_web_sm
 varify the installation
 python -m spacy validate
 
-    
-    return soap
-```
