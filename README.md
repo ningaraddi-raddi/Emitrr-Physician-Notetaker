@@ -5,19 +5,18 @@
 ## 📋 Table of Contents
 
 1. [Executive Summary](#-executive-summary)
-2. [Problem Statement](#-problem-statement)
-3. [System Architecture](#-system-architecture)
-4. [Component 1: Named Entity Recognition](#-component-1-named-entity-recognition-ner)
-5. [Component 2: Medical Summary Generation](#-component-2-medical-summary-generation)
-6. [Component 3: Sentiment & Intent Analysis](#-component-3-sentiment--intent-analysis)
-7. [Component 4: SOAP Note Generation](#-component-4-soap-note-generation)
-8. [Results & Performance Analysis](#-results--performance-analysis)
-9. [Challenges & Limitations](#-challenges--limitations)
-10. [Installation & Setup](#-installation--setup)
-11. [How to Run the Project](#-how-to-run-the-project)
-12. [Project Structure](#-project-structure)
-13. [Future Improvements](#-future-improvements)
-14. [Conclusion](#-conclusion)
+2. [System Architecture](#-system-architecture)
+3. [Component 1: Named Entity Recognition](#-component-1-named-entity-recognition-ner)
+4. [Component 2: Medical Summary Generation](#-component-2-medical-summary-generation)
+5. [Component 3: Sentiment & Intent Analysis](#-component-3-sentiment--intent-analysis)
+6. [Component 4: SOAP Note Generation](#-component-4-soap-note-generation)
+7. [Results & Performance Analysis](#-results--performance-analysis)
+8. [Challenges & Limitations](#-challenges--limitations)
+9. [Installation & Setup](#-installation--setup)
+10. [How to Run the Project](#-how-to-run-the-project)
+11. [Project Structure](#-project-structure)
+12. [Future Improvements](#-future-improvements)
+13. [Conclusion](#-conclusion)
 
 ---
 
@@ -777,9 +776,3 @@ def generate_soap_note(ner_results, summary, sentiment):
     
     return soap
 ```
-
-### 4.3 Sample SOAP Output
-
-```json
-{
-  "
