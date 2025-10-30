@@ -1,0 +1,25 @@
+{
+    "Patient": {
+        "Symptoms": [
+            "shoulder pain",
+            "dizziness",
+            "headache",
+            "numbness",
+            "stiffness"
+        ],
+        "Diagnosis": [
+            "shoulder strain"
+        ],
+        "Treatment": [
+            "physiotherapy",
+            "painkillers"
+        ],
+        "Prognosis": [
+            "Improving"
+        ],
+        "Measurements": [
+            "2 months",
+            "4 sessions"
+        ]
+    }
+}
