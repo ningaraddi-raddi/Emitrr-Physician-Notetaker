@@ -1,0 +1,10 @@
+Doctor: Hello, Sarah. How have you been sleeping recently?
+Patient: Not great, doctor. I wake up multiple times at night and feel tired in the morning.
+Doctor: Have you noticed any triggers or anxiety before bedtime?
+Patient: Yes, I keep thinking about work and deadlines. It’s hard to shut off my mind.
+Doctor: Have you been taking the prescribed medication?
+Patient: I stopped last month because it made me feel drowsy during the day.
+Doctor: That explains it. We can try a lower dosage and include breathing exercises before bed.
+Patient: Okay, I’ll try that. I just want to sleep properly again.
+Doctor: You will. Let’s review your progress in two weeks.
+Patient: Thank you, doctor.

@@ -1,0 +1,8 @@
+numpy==1.24.3
+spacy==3.7.5
+thinc==8.2.3
+scispacy==0.5.3
+https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.3/en_core_sci_md-0.5.3.tar.gz
+transformers==4.40.0
+torch==2.3.0
+sentencepiece==0.2.0
