@@ -1,8 +1,8 @@
-# 🏥 Physician Notetaker - AI Medical Documentation System
+# Physician Notetaker - AI Medical Documentation System
 
 
 
-## 📋 Table of Contents
+##  Table of Contents
 
 1. [Executive Summary](#-executive-summary)
 2. [System Architecture](#-system-architecture)
@@ -14,13 +14,11 @@
 8. [Challenges & Limitations](#-challenges--limitations)
 9. [Installation & Setup](#-installation--setup)
 10. [How to Run the Project](#-how-to-run-the-project)
-11. [Project Structure](#-project-structure)
-12. [Future Improvements](#-future-improvements)
-13. [Conclusion](#-conclusion)
+
 
 ---
 
-## 🎯 Executive Summary
+## Executive Summary
 
 This project presents an end-to-end AI-powered system for automating medical documentation from doctor-patient conversations. The system employs a **hybrid approach** combining state-of-the-art transformer models (BioBERT) with rule-based pattern matching to extract medical entities, analyze patient sentiment and intent, and generate structured SOAP notes.
 
