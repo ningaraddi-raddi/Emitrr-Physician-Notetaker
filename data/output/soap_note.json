@@ -1,0 +1,9 @@
+{
+    "Patient_Name": "David Thompson",
+    "SOAP_Note": {
+        "Subjective": "The patient reports experiencing persistent shoulder pain, headache, dizziness, numbness, and stiffness. He also mentioned having undergone four sessions of physiotherapy last month and taking painkillers prescribed by his doctor. Despite treatment, he still experiences numbness in his fingers.",
+        "Objective": "Patient appears alert but reports discomfort in the shoulder region. Range of motion in the affected shoulder may be limited due to pain and stiffness. Numbness in fingers suggests possible nerve involvement or inflammation. Vital signs not mentioned.",
+        "Assessment": "Primary diagnosis is a shoulder injury, likely muscular or nerve-related. Associated symptoms include persistent pain, numbness, stiffness, and dizziness. The condition shows partial improvement post-physiotherapy, but residual numbness remains.",
+        "Plan": "Continue physiotherapy sessions focused on mobility and nerve relaxation. Consider neurological evaluation if numbness persists. Maintain a home exercise regimen to prevent stiffness. Continue pain management with prescribed medications as needed. Follow up in 2–3 weeks to assess improvement. Prognosis indicates full recovery with consistent physiotherapy and monitoring."
+    }
+}
