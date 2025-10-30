@@ -1,0 +1,18 @@
+{
+    "Patient_Name": "David Thompson",
+    "Symptoms": [
+        "Been Experiencing Persistent Shoulder Pain",
+        "Dizzy",
+        "Exercises",
+        "Headache",
+        "Numbness",
+        "Stiffness"
+    ],
+    "Diagnosis": "Injury",
+    "Treatment": [
+        "4 Physiotherapy Last Month And Some Painkillers Prescribed By The Doctor",
+        "4 Sessions Of Physiotherapy Last Month And Some Painkillers Prescribed By The Doctor"
+    ],
+    "Current_Status": "Numbness In My Fingers",
+    "Prognosis": "Full Recovery"
+}
