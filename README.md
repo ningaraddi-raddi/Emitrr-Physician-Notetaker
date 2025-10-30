@@ -772,7 +772,24 @@ def generate_soap_note(ner_results, summary, sentiment):
             "Follow_Up": extract_follow_up(ner_results),
             "Patient_Education": generate_education(sentiment)
         }
+
     }
+
+##installation
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>
+
+python -m venv venv
+source venv/bin/activate      # For macOS/Linux
+venv\Scripts\activate         # For Windows
+
+pip install -U pip
+pip install spacy transformers torch datasets huggingface_hub accelerate
+
+python -m spacy download en_core_web_sm
+varify the installation
+python -m spacy validate
+
     
     return soap
 ```
