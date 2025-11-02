@@ -30,30 +30,33 @@ This project presents an end-to-end AI-powered system for automating medical doc
 - **Automated SOAP Notes**: Clinical documentation in standardized format
 - **Modular Pipeline**: Easy to customize and extend
 
-### Technology Stack
+###Tech Stack
+```
+| Component            Technology                             Purpose 
+-----------------------------------------------------------------------------
+| NER Model            BioBERT (d4data/biomedical-ner-all)   Medical entity extraction
 -------------------------------------------------------------------------------------
-| Component            | Technology                          | Purpose |
-|----------------------|-------------------------------------|------------------
-| NER Model            | BioBERT (d4data/biomedical-ner-all) | Medical entity extraction
+| Secondary NER        scispaCy (en_core_sci_md) |          Rule-based pattern matching 
 -------------------------------------------------------------------------------------
-| Secondary NER        | scispaCy (en_core_sci_md) |         |Rule-based pattern matching 
+| Sentiment/Intent     Fine-tuned BioBERT                   Patient emotion & intent classification 
 -------------------------------------------------------------------------------------
-| Sentiment/Intent     | Fine-tuned BioBERT                  | Patient emotion & intent classification 
+| Framework            HuggingFace Transformers + PyTorch   Deep learning infrastructure 
 -------------------------------------------------------------------------------------
-| Framework            | HuggingFace Transformers + PyTorch  | Deep learning infrastructure 
--------------------------------------------------------------------------------------
-| NLP Tools            | spaCy 3.7+                          | Pattern matching & text processing 
+| NLP Tools            spaCy 3.7+                           Pattern matching & text processing
 
--------------------------------------------------------------------------------------
-
-
-
+```
 ## System Architecture
 
 ```
+
+_________________________________________________________________
+                 INPUT: Raw Conversation Transcript
+_________________________________________________________________
+                                |
+                                ▼
 ┌────────────────────────────────────────────────────────────────┐
-│                  INPUT: Raw Conversation Transcript            │
-│          (Separate files: patient_text.txt, doctor_text.txt)   │
+│                       After Pre-processing
+│         (Separate files: patient_text.txt, doctor_text.txt)    │
 └───────────────────────────────┬────────────────────────────────┘
                                 │
                                 ▼
@@ -93,27 +96,27 @@ This project presents an end-to-end AI-powered system for automating medical doc
 └───────────────────────────────┬────────────────────────────────┘
                                 │
                                 ▼
-┌────────────────────────────────────────────────────────────────┐
-│          STAGE 3: SENTIMENT & INTENT ANALYSIS                  │
-│  ┌──────────────────────────────────────────────────────────┐ │
-│  │  Multi-Task BioBERT Classifier                           │ │
-│  │                                                          │ │
+┌────────────────────────────────────────────────────────────
+│          STAGE 3: SENTIMENT & INTENT ANALYSIS                  
+│  ┌──────────────────────────────────────────────────────────┐ 
+│  │  Multi-Task BioBERT Classifier                          │ │
+│  │                                                         │ │
 │  │  BioBERT Encoder (12 layers, 768 hidden)                │ │
-│  │         │                                                │ │
+│  │         │                                               │ │
 │  │         ├─► Sentiment Head (3 classes)                  │ │
 │  │         │    ├─ Anxious                                 │ │
 │  │         │    ├─ Neutral                                 │ │
 │  │         │    └─ Reassured                               │ │
-│  │         │                                                │ │
+│  │         │                                               │ │
 │  │         └─► Intent Head (4 classes)                     │ │
 │  │              ├─ Reporting symptoms                      │ │
 │  │              ├─ Seeking reassurance                     │ │
 │  │              ├─ Expressing concern                      │ │
 │  │              └─ Confirming improvement                  │ │
-│  └──────────────────────────────────────────────────────────┘ │
-│                                                                │
-│  Output: sentiment_results.json                                │
-└───────────────────────────────┬────────────────────────────────┘
+│  └──────────────────────────────────────────────────────────┘│
+│                                                              │
+│  Output: sentiment_results.json                              │
+└───────────────────────────────┬──────────────────────────────┘
                                 │
                                 ▼
 ┌────────────────────────────────────────────────────────────────┐
@@ -139,19 +142,21 @@ This project presents an end-to-end AI-powered system for automating medical doc
 
 ---
 
+
+
 ##  Component 1: Named Entity Recognition (NER)
 
 ### 1.1 Why Hybrid NER?
 
 Medical text extraction requires a **multi-layered approach** because:
 
-| Challenge | Solution |
-|-----------|----------|
-| **Domain-specific terminology** | BioBERT pre-trained on medical literature |
-| **Conversational language** | Rule-based patterns for colloquial expressions |
-| **Abbreviations & acronyms** | Pattern matching with medical knowledge base |
-| **Context-dependent meanings** | Transformer attention mechanism |
-| **Rare medical terms** | Regex patterns for measurements & quantities |
+| Challenge |                      |         Solution |
+|-----------|-----------------------------------------------------------------|
+| **Domain-specific terminology**  | BioBERT pre-trained on medical literature |
+| **Conversational language**      | Rule-based patterns for colloquial expressions |
+| **Abbreviations & acronyms**     | Pattern matching with medical knowledge base |
+| **Context-dependent meanings**   | Transformer attention mechanism |
+| **Rare medical terms**           | Regex patterns for measurements & quantities |
 
 ### 1.2 Model Selection: Why BioBERT?
 
