@@ -13,7 +13,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # ----------------------------------------------------------------------
 # 1. Generate Summary (ner_to_summary.py)
 # ----------------------------------------------------------------------
-print("📌 Running NER → Summary module...")
+print("Running NER → Summary module...")
 summary = ner_summary_main()  # This will generate summary.json in processed
 # Save a copy in output folder
 processed_summary_file = os.path.join(PROCESSED_DIR, "summary.json")
@@ -30,7 +30,7 @@ else:
 # ----------------------------------------------------------------------
 # 2. Run Sentiment & Intent (sentiment_intent.py)
 # ----------------------------------------------------------------------
-print("\n📌 Running Sentiment & Intent module...")
+print("\n Running Sentiment & Intent module...")
 sentiment_output_file = os.path.join(OUTPUT_DIR, "sentiment_intent_results.json")
 sentiment_pipeline(
     input_path=os.path.join(PROCESSED_DIR, "patient_text.txt"),
@@ -42,7 +42,7 @@ with open(sentiment_output_file, "r", encoding="utf-8") as f:
 # ----------------------------------------------------------------------
 # 3. Run SOAP generator (soap_generator_auto.py)
 # ----------------------------------------------------------------------
-print("\n📌 Running SOAP generator module...")
+print("\n Running SOAP generator module...")
 # Override the output path to save in OUTPUT_DIR
 from soap_generator_auto import load_data, map_to_soap_auto, refine_text_with_llm
 
@@ -76,4 +76,4 @@ with open(ner_output_file, "w", encoding="utf-8") as f:
     json.dump(ner_data, f, indent=4, ensure_ascii=False)
 print(f"[SUCCESS] NER results copied to {ner_output_file}")
 
-print("\n🎯 Pipeline complete! All outputs saved in data/output/")
+print("\n Pipeline complete! All outputs saved in data/output/")
