@@ -48,7 +48,7 @@ This project presents an end-to-end AI-powered system for automating medical doc
 
 
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
@@ -139,7 +139,7 @@ This project presents an end-to-end AI-powered system for automating medical doc
 
 ---
 
-## 🔍 Component 1: Named Entity Recognition (NER)
+##  Component 1: Named Entity Recognition (NER)
 
 ### 1.1 Why Hybrid NER?
 
@@ -158,7 +158,7 @@ Medical text extraction requires a **multi-layered approach** because:
 #### **Why Not Traditional ML?**
 
 ```python
-# ❌ Traditional ML Limitations:
+# Traditional ML Limitations:
 
 1. Naive Bayes / SVM with TF-IDF:
    - No context understanding
@@ -175,7 +175,7 @@ Medical text extraction requires a **multi-layered approach** because:
 #### **Why BioBERT?**
 
 ```python
-# ✅ BioBERT Advantages:
+# BioBERT Advantages:
 
 1. Pre-trained on 200K PubMed abstracts + 270K PMC articles
 2. Understands medical terminology:
@@ -222,10 +222,10 @@ ner_pipeline = pipeline(
 ```
 
 **Why this model specifically?**
-- ✅ Fine-tuned on multiple medical NER datasets (BC5CDR, NCBI, JNLPBA)
-- ✅ Recognizes 5 entity types: Disease, Chemical, Gene, Protein, Anatomy
-- ✅ Handles medical abbreviations and multi-word entities
-- ✅ 85-90% F1-score on medical benchmark datasets
+-  Fine-tuned on multiple medical NER datasets (BC5CDR, NCBI, JNLPBA)
+-  Recognizes 5 entity types: Disease, Chemical, Gene, Protein, Anatomy
+-  Handles medical abbreviations and multi-word entities
+-  85-90% F1-score on medical benchmark datasets
 
 #### **Layer 2: spaCy Rule-Based Matching**
 
@@ -254,10 +254,10 @@ MEDICAL_KNOWLEDGE = {
 ```
 
 **Why rule-based layer?**
-- ✅ Captures domain patterns transformers might miss
-- ✅ Handles conversational phrases: "I have trouble sleeping"
-- ✅ Fast inference (CPU-friendly)
-- ✅ Complements ML predictions (ensemble effect)
+-  Captures domain patterns transformers might miss
+-  Handles conversational phrases: "I have trouble sleeping"
+-  Fast inference (CPU-friendly)
+-  Complements ML predictions (ensemble effect)
 
 #### **Layer 3: Context-Aware Refinement**
 
@@ -356,14 +356,14 @@ physiotherapy. Now I only have occasional backache.
 | **Overall** | **0.88** | **0.84** | **0.86** | **649** |
 
 **Analysis:**
-- ✅ High precision (88%) - Few false positives
-- ✅ Good recall (84%) - Captures most entities
-- ✅ Balanced F1 (86%) - Robust performance
-- ⚠️ Lower performance on prognosis (complex linguistic expressions)
+-  High precision (88%) - Few false positives
+-  Good recall (84%) - Captures most entities
+-  Balanced F1 (86%) - Robust performance
+-  Lower performance on prognosis (complex linguistic expressions)
 
 ---
 
-## 📊 Component 2: Medical Summary Generation
+##  Component 2: Medical Summary Generation
 
 ### 2.1 Purpose & Approach
 
@@ -449,7 +449,7 @@ def categorize_entities(entities, text):
 
 ---
 
-## 🧠 Component 3: Sentiment & Intent Analysis
+##  Component 3: Sentiment & Intent Analysis
 
 ### 3.1 Why Transformers Over Traditional ML?
 
@@ -458,7 +458,7 @@ This is a **critical design decision** that directly addresses the assignment re
 #### **Traditional ML Approach (NOT Used)**
 
 ```python
-# ❌ What we DIDN'T do (and why):
+# What we DIDN'T do (and why):
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
@@ -482,7 +482,7 @@ clf.fit(X, y)
 #### **Transformer Approach (What We Used)**
 
 ```python
-# ✅ Why we used BioBERT transformers:
+#  Why we used BioBERT transformers:
 
 1. Contextual Understanding:
    "I'm NOT worried about the pain"        → Neutral/Reassured
@@ -587,14 +587,14 @@ Data Split:
 
 ```python
 # Pre-trained BioBERT knows:
-✅ Medical terminology
-✅ Clinical language patterns
-✅ Domain-specific relationships
+ Medical terminology
+ Clinical language patterns
+ Domain-specific relationships
 
 # But doesn't know:
-❌ Patient sentiment in conversations
-❌ Intent classification in doctor-patient dialogue
-❌ Our specific 7 classes (3 sentiment + 4 intent)
+ Patient sentiment in conversations
+ Intent classification in doctor-patient dialogue
+ Our specific 7 classes (3 sentiment + 4 intent)
 
 # Solution: Fine-tune on labeled conversation data
 ```
@@ -631,10 +631,10 @@ WARMUP_RATIO = 0.1          # LR warmup
 GRADIENT_CLIP = 1.0         # Gradient clipping
 
 # Additional techniques:
-✅ Data augmentation (word dropout 15%)
-✅ Cosine learning rate schedule
-✅ Gradient accumulation (simulate larger batch)
-✅ Layer freezing (reduce trainable parameters)
+ Data augmentation (word dropout 15%)
+ Cosine learning rate schedule
+ Gradient accumulation (simulate larger batch)
+ Layer freezing (reduce trainable parameters)
 
 # Trainable parameters: 43.7M / 108.9M (40.1%)
 ```
@@ -727,7 +727,7 @@ def compute_loss(outputs, labels_sentiment, labels_intent):
 
 ---
 
-## 📝 Component 4: SOAP Note Generation
+##  Component 4: SOAP Note Generation
 
 ### 4.1 SOAP Format Overview
 
@@ -775,8 +775,7 @@ def generate_soap_note(ner_results, summary, sentiment):
  return soap
 ```
 
-
-##installation
+#### installation
 git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>
 
