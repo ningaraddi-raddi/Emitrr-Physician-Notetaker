@@ -46,63 +46,60 @@ It processes **raw doctor–patient transcripts**, extracts key medical entities
 
 
 # System Architecture
-# ---------------------
 
 # Overview:
-# The Physician Notetaker system follows a modular NLP pipeline architecture.
-# Each component is independent but connected sequentially to ensure accurate
-# medical documentation from raw conversation transcripts.
+The Physician Notetaker system follows a modular NLP pipeline architecture.Each component is independent but connected sequentially to ensure accurate medical documentation from raw conversation transcripts.
 
-# ┌────────────────────────┐
-# │  Doctor-Patient Input  │
-# └────────────┬───────────┘
-#              │
-#              ▼
-# ┌────────────────────────┐
-# │  1. NER Extractor      │  → Extracts medical entities
-# │     (Symptoms, Diagnosis, Treatment) 
-# └────────────┬───────────┘
-#              │
-#              ▼
-# ┌────────────────────────┐
-# │  2. Summarizer         │  → Generates structured summary
-# │     (Uses entities + context)
-# └────────────┬───────────┘
-#              │
-#              ▼
-# ┌────────────────────────┐
-# │  3. Sentiment & Intent │  → Detects emotional tone and purpose
-# │     (Helps contextualize SOAP)
-# └────────────┬───────────┘
-#              │
-#              ▼
-# ┌────────────────────────┐
-# │  4. SOAP Generator     │  → Builds final structured medical note
-# │     (Subjective, Objective, Assessment, Plan)
-# └────────────┬───────────┘
-#              │
-#              ▼
-# ┌────────────────────────┐
-# │  5. Output (JSON/Text) │  → Saved in /output/soap_note.json
-# └────────────────────────┘
+ ┌────────────────────────┐
+ │  Doctor-Patient Input  │
+ └────────────┬───────────┘
+              │
+              ▼
+ ┌────────────────────────┐
+ │  1. NER Extractor      │  → Extracts medical entities
+ │     (Symptoms, Diagnosis, Treatment) 
+ └────────────┬───────────┘
+              │
+              ▼
+ ┌────────────────────────┐
+ │  2. Summarizer         │  → Generates structured summary
+ │     (Uses entities + context)
+ └────────────┬───────────┘
+              │
+              ▼
+ ┌────────────────────────┐
+ │  3. Sentiment & Intent │  → Detects emotional tone and purpose
+ │     (Helps contextualize SOAP)
+ └────────────┬───────────┘
+              │
+              ▼
+ ┌────────────────────────┐
+ │  4. SOAP Generator     │  → Builds final structured medical note
+ │     (Subjective, Objective, Assessment, Plan)
+ └────────────┬───────────┘
+              │
+              ▼
+ ┌────────────────────────┐
+ │  5. Output (JSON/Text) │  → Saved in /output/soap_note.json
+ └────────────────────────┘
 
 
 # Data Flow Summary:
-# ------------------
-# Input:   data/sample_transcript.txt
-# Output:  output/soap_note.json
+ ------------------
+ Input:   data/sample_transcript.txt
+ Output:  output/soap_note.json
 
-# Execution Pipeline:
-# NER → Summarizer → Sentiment → SOAP Generator
+ Execution Pipeline:
+ NER → Summarizer → Sentiment → SOAP Generator
 
 # Example Run (Full Pipeline)
 python src/pipeline_runner.py --input data/sample_transcript.txt
 
 # The final SOAP note includes:
-# - Subjective: Patient complaints/symptoms
-# - Objective: Doctor observations
-# - Assessment: Diagnosis summary
-# - Plan: Recommended treatment steps
+ - Subjective: Patient complaints/symptoms
+ - Objective: Doctor observations
+ - Assessment: Diagnosis summary
+ - Plan: Recommended treatment steps
 
 
 
