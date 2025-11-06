@@ -98,7 +98,9 @@ Doctor-Patient Transcript
 
 **Output:** Clinical SOAP note in JSON format
 
-<img width="1878" height="1013" alt="image" src="https://github.com/user-attachments/assets/57666edc-4fd6-47fc-96ff-876aea7417b5" />
+
+<img width="1817" height="1011" alt="image" src="https://github.com/user-attachments/assets/9aa1fd21-b548-4165-8147-f25764600576" />
+
 
 
 ---
