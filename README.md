@@ -64,12 +64,20 @@ Doctor-Patient Transcript
 
 **Output:** Symptoms, Diagnosis, Treatment, Prognosis
 
+
+<img width="1191" height="1017" alt="image" src="https://github.com/user-attachments/assets/11bced6d-2280-4cc4-bfeb-5f2d9c35b3a7" />
+
+
 ### 2. Medical Summary Generation
 - Deduplicates and cleans extracted entities
 - Extracts patient information using regex
 - Maps entities to medical categories
 
 **Output:** Structured JSON summary
+
+
+<img width="1795" height="878" alt="image" src="https://github.com/user-attachments/assets/b38ab9b8-a1d9-47c0-a882-f4c53031da7e" />
+
 
 ### 3. Sentiment & Intent Analysis
 - **Multi-task BioBERT** classifier with two heads:
@@ -79,6 +87,9 @@ Doctor-Patient Transcript
 
 **Output:** Patient emotional state and conversation intent
 
+<img width="1343" height="408" alt="image" src="https://github.com/user-attachments/assets/e4ac2842-b445-4854-b39c-9bcadb10d76c" />
+
+
 ### 4. SOAP Note Generation
 - **S** (Subjective): Patient complaints & history
 - **O** (Objective): Doctor observations & exam findings
@@ -86,6 +97,9 @@ Doctor-Patient Transcript
 - **P** (Plan): Treatment & follow-up recommendations
 
 **Output:** Clinical SOAP note in JSON format
+
+<img width="1878" height="1013" alt="image" src="https://github.com/user-attachments/assets/57666edc-4fd6-47fc-96ff-876aea7417b5" />
+
 
 ---
 
@@ -167,23 +181,12 @@ python src/soap_generator.py --ner output/ner_results.json --summary output/summ
 
 | Component | Metric | Score |
 |-----------|--------|-------|
-| NER | F1-Score | 0.86 |
+
 | Sentiment | Accuracy | 1.00* |
 | Intent | Accuracy | 1.00* |
-| SOAP Generation | Completeness | 95% |
 
 *100% accuracy on synthetic test data (potential overfitting)
 
-### NER Performance by Entity Type
-
-| Entity | Precision | Recall | F1-Score |
-|--------|-----------|--------|----------|
-| Symptoms | 0.89 | 0.85 | 0.87 |
-| Diagnosis | 0.92 | 0.88 | 0.90 |
-| Treatment | 0.87 | 0.83 | 0.85 |
-| Prognosis | 0.85 | 0.81 | 0.83 |
-
----
 
 ##  Project Structure
 
