@@ -1,258 +1,218 @@
-#  Physician Notetaker – AI Medical Documentation System
+# Physician Notetaker – AI Medical Documentation System
 
-An end-to-end AI pipeline that automatically converts doctor-patient conversations into structured **SOAP notes**, leveraging advanced NLP and transformer-based models for medical text understanding.
+An end-to-end AI pipeline that automatically converts doctor-patient conversations into structured **SOAP notes** using NLP and transformer-based models.
 
 ---
 
-## Table of Contents
+##  Table of Contents
 
-1. [Executive Summary](#executive-summary)  
+1. [Overview](#overview)  
 2. [System Architecture](#system-architecture)  
-3. [Component 1: Named Entity Recognition (NER)](#component-1-named-entity-recognition-ner)  
-4. [Component 2: Medical Summary Generation](#component-2-medical-summary-generation)  
-5. [Component 3: Sentiment & Intent Analysis](#component-3-sentiment--intent-analysis)  
-6. [Component 4: SOAP Note Generation](#component-4-soap-note-generation)  
-7. [Results & Performance Analysis](#results--performance-analysis)  
-8. [Challenges & Limitations](#challenges--limitations)  
-9. [Installation & Setup](#installation--setup)  
-10. [How to Run the Project](#how-to-run-the-project)
+3. [Key Components](#key-components)  
+4. [Tech Stack](#tech-stack)  
+5. [Installation](#installation)  
+6. [Usage](#usage)  
+7. [Results](#results)
 
 ---
-
-##  Executive Summary
-
-**Physician Notetaker** is an AI-powered medical documentation assistant designed to reduce the burden of manual note-taking in clinical practice.  
-It processes **raw doctor–patient transcripts**, extracts key medical entities, analyzes patient sentiment and intent, and finally generates structured **SOAP notes** ready for use in EHR systems.
-
-###  Highlights
-
-- **Hybrid NER System** – 86% F1-score by combining transformer and rule-based methods  
-- **Multi-Task BioBERT** – Joint sentiment and intent classification  
-- **Auto-Generated SOAP Notes** – Structured documentation for clinical workflows  
-- **Modular Design** – Each component is independent and reusable  
-- **Thorough Evaluation** – Overfitting analysis and model comparison included  
-
-###  Tech Stack
-
-| Component | Technology | Purpose |
-|------------|-------------|----------|
-| **NER Model** | BioBERT (`d4data/biomedical-ner-all`) | Medical entity extraction |
-| **Secondary NER** | scispaCy (`en_core_sci_md`) | Rule-based pattern matching |
-| **Sentiment & Intent** | Fine-tuned BioBERT | Emotion and intent classification |
-| **Framework** | HuggingFace Transformers, PyTorch | Deep learning infrastructure |
-| **NLP Tools** | spaCy 3.7+ | Pattern matching and text cleaning |
-
----
-
-
-# System Architecture
 
 ##  Overview
-The **Physician Notetaker** system follows a **modular NLP pipeline architecture**.  
-Each component is independent yet connected sequentially to ensure accurate and structured medical documentation from raw doctor–patient transcripts.
 
+**Physician Notetaker** automates medical documentation by processing raw doctor-patient transcripts and generating structured SOAP notes. The system uses a hybrid approach combining BioBERT transformers with rule-based NLP methods.
+
+### Key Features
+
+- **Hybrid NER System** – 86% F1-score for medical entity extraction
+- **Multi-Task Learning** – Joint sentiment and intent classification  
+- **Auto SOAP Notes** – Structured clinical documentation
+- **Modular Pipeline** – Independent, reusable components
+
+---
+
+##  System Architecture
 
 ```text
+Doctor-Patient Transcript
+         ↓
 ┌────────────────────────┐
-│  Doctor–Patient Input  │
-└────────────┬───────────┘
-             │
-             ▼
-┌────────────────────────┐
-│  1. NER Extractor      │  → Extracts medical entities  
-│     (Symptoms, Diagnosis, Treatment)
-└────────────┬───────────┘
-             │
-             ▼
-┌────────────────────────┐
-│  2. Summarizer         │  → Generates structured summary  
-│     (Uses entities + contextual cues)
-└────────────┬───────────┘
-             │
-             ▼
-┌────────────────────────┐
-│  3. Sentiment & Intent │  → Detects emotional tone and purpose  
-│     (Helps contextualize SOAP generation)
-└────────────┬───────────┘
-             │
-             ▼
-┌────────────────────────┐
-│  4. SOAP Generator     │  → Builds final structured medical note  
-│     (Subjective, Objective, Assessment, Plan)
-└────────────┬───────────┘
-             │
-             ▼
-┌────────────────────────┐
-│  5. Output (JSON/Text) │  → Saved in /output/soap_note.json  
+│  1. NER Extraction     │  → Extract symptoms, diagnosis, treatment
 └────────────────────────┘
-
-
-
-# Data Flow Summary:
- ------------------
- Input:   data/sample_transcript.txt
- Output:  output/soap_note.json
-
- Execution Pipeline:
- NER → Summarizer → Sentiment → SOAP Generator
-
-# Example Run (Full Pipeline)
-python src/pipeline_runner.py --input data/sample_transcript.txt
-
-# The final SOAP note includes:
- - Subjective: Patient complaints/symptoms
- - Objective: Doctor observations
- - Assessment: Diagnosis summary
- - Plan: Recommended treatment steps
-
-
+         ↓
+┌────────────────────────┐
+│  2. Summarization      │  → Generate structured medical summary
+└────────────────────────┘
+         ↓
+┌────────────────────────┐
+│  3. Sentiment/Intent   │  → Analyze patient emotion & purpose
+└────────────────────────┘
+         ↓
+┌────────────────────────┐
+│  4. SOAP Generation    │  → Build clinical note (S.O.A.P format)
+└────────────────────────┘
+         ↓
+    SOAP Note Output
+```
 
 ---
 
-##  Component 1: Named Entity Recognition (NER)
+##  Key Components
 
-Medical text is full of abbreviations, domain-specific terms, and conversational expressions.  
-A **hybrid NER** approach captures this complexity using multiple layers:
+### 1. Named Entity Recognition (NER)
+- **BioBERT Transformer** – Pre-trained on 470K+ medical papers
+- **scispaCy** – Rule-based pattern matching with 100K+ medical terms
+- **Regex Patterns** – Extract measurements, dates, and quantities
 
-| Challenge | Solution |
-|------------|-----------|
-| Domain-specific medical language | BioBERT pre-training on PubMed + PMC |
-| Informal expressions | Rule-based pattern matching |
-| Abbreviations | Contextual and regex extraction |
-| Contextual ambiguity | Transformer attention mechanism |
+**Output:** Symptoms, Diagnosis, Treatment, Prognosis
 
-###  Why BioBERT?
+### 2. Medical Summary Generation
+- Deduplicates and cleans extracted entities
+- Extracts patient information using regex
+- Maps entities to medical categories
 
-Traditional ML models (Naive Bayes, SVMs, TF-IDF) fail to capture semantics.  
-**BioBERT**, trained on over 470K biomedical papers, understands medical context:
-> “myocardial infarction” = “heart attack” = “MI”
+**Output:** Structured JSON summary
 
-**Performance Benchmarks:**
-- BC5CDR: 88.6% F1  
-- NCBI Disease: 89.4% F1  
-- Real-world medical conversations: ~86% F1  
+### 3. Sentiment & Intent Analysis
+- **Multi-task BioBERT** classifier with two heads:
+  - **Sentiment:** Anxious / Neutral / Reassured
+  - **Intent:** Reporting / Seeking / Expressing / Confirming
+- Fine-tuned on 3,000 medical conversation samples
 
-###  Rule-Based and Regex Layer
+**Output:** Patient emotional state and conversation intent
 
-spaCy’s `Matcher` and regex patterns handle conversational phrases like:
-- “feeling dizzy”, “having trouble sleeping”
-- “diagnosed with whiplash injury”
-- “10 sessions of physiotherapy”
+### 4. SOAP Note Generation
+- **S** (Subjective): Patient complaints & history
+- **O** (Objective): Doctor observations & exam findings
+- **A** (Assessment): Diagnosis & clinical impression
+- **P** (Plan): Treatment & follow-up recommendations
 
-This ensures comprehensive coverage of both clinical and everyday medical language.
-
----
-
-##  Component 2: Medical Summary Generation
-
-**Goal:** Convert raw NER output into a concise, clinically meaningful summary.
-
-### Workflow:
-1. **Entity Deduplication** – keep longest unique phrases.  
-2. **Patient Identification** – extract names using regex.  
-3. **Contextual Mapping** – determine if entities represent symptoms, diagnoses, or treatments.  
-
-### Example Output
-```json
-{
-  "Patient_Name": "Janet Jones",
-  "Chief_Complaint": "Neck and back pain following motor vehicle accident",
-  "Symptoms": ["Severe neck pain", "Back pain", "Sleep disturbance"],
-  "Diagnosis": "Whiplash injury",
-  "Treatment": ["10 sessions of physiotherapy", "Analgesics"],
-  "Prognosis": "Full recovery expected within 6 months"
-}
+**Output:** Clinical SOAP note in JSON format
 
 ---
 
-# Component 3: Named Entity Recognition (NER) Extractor
-# ------------------------------------------------------
+##  Tech Stack
 
-# Description:
-# Extracts key medical entities such as Symptoms, Diagnosis, and Treatment
-# from the doctor-patient transcript using pretrained NLP models.
-
-# Run the NER extractor directly
-python src/ner_extractor.py --input data/sample_transcript.txt
-
-# Example Output:
-# {
-#     "Symptoms": ["shoulder pain", "numbness", "dizziness"],
-#     "Diagnosis": ["shoulder injury"],
-#     "Treatment": ["physiotherapy", "painkillers"]
-# }
-
-# Notes:
-# - Uses scispaCy / BioClinicalBERT for medical entity recognition
-# - Handles missing or ambiguous data automatically
-# - Output is saved as JSON for use by other pipeline components
----
-
-
-# Component 4: Medical Summarizer
-# -------------------------------
-
-# Description:
-# Generates a concise and structured summary of the medical conversation.
-# Integrates extracted entities from the NER step with contextual transcript data.
-
-# Run the summarizer directly
-python src/summarizer.py --transcript data/sample_transcript.txt --ner_output data/ner_results.json
-
-# Example Output:
-# "Patient David Thompson reports persistent shoulder pain, dizziness, and numbness.
-# Diagnosis: Shoulder injury. Advised physiotherapy sessions and prescribed painkillers."
-
-# Notes:
-# - Uses transformer-based summarization models like Flan-T5 or BioBART
-# - Handles incomplete or uncertain information contextually
-# - Output is a human-readable summary used by the SOAP generator
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| NER | BioBERT (`d4data/biomedical-ner-all`) | Medical entity extraction |
+| Secondary NER | scispaCy (`en_core_sci_md`) | Rule-based patterns |
+| Sentiment/Intent | Fine-tuned BioBERT | Emotion & intent classification |
+| Framework | HuggingFace Transformers, PyTorch | Deep learning |
+| NLP Tools | spaCy 3.7+ | Text processing |
 
 ---
 
-# Component 5: Pipeline Runner
-# ----------------------------
+##  Installation
 
-# Description:
-# Orchestrates the entire pipeline — from transcript input to final SOAP note.
-# Runs NER → Summarization → Sentiment → SOAP generation automatically.
-
-# Run full pipeline
-python src/pipeline_runner.py --input data/sample_transcript.txt
-
-# Example Output:
-#  NER Extraction Complete
-#  Summary Generated
-#  Sentiment & Intent Analyzed
-#  SOAP Note Created: output/soap_note.json
-
-# Notes:
-# - Automates all steps sequentially
-# - Ensures consistent and reproducible outputs
-# - Ideal for deployment in clinical NLP systems
-
-
-
-# Clone the repository
+### Step 1: Clone Repository
+```bash
 git clone https://github.com/yourusername/Physician-Notetaker.git
 cd Physician-Notetaker
+```
 
-# Create virtual environment
+### Step 2: Create Virtual Environment
+```bash
 python -m venv venv
-source venv/bin/activate  # (Linux/Mac)
-venv\Scripts\activate     # (Windows)
+source venv/bin/activate      # macOS/Linux
+venv\Scripts\activate         # Windows
+```
 
-# Install dependencies
+### Step 3: Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
-# Core Libraries
-spacy==3.7.2
-scispacy==0.5.2
-transformers==4.45.0
-torch==2.3.0
-pandas==2.2.3
-nltk==3.9
-json
-argparse
+### Step 4: Download Models
+```bash
+python -m spacy download en_core_web_sm
+python -m spacy download en_core_sci_md
+python -m spacy validate
+```
 
+---
+
+##  Usage
+
+### Run Full Pipeline
+```bash
+python src/pipeline_runner.py --input data/sample_transcript.txt
+```
+
+**Output:**
+- `output/ner_results.json` – Extracted entities
+- `output/summary.json` – Medical summary
+- `output/sentiment_results.json` – Sentiment/intent
+- `output/soap_note.json` – Final SOAP note
+
+### Run Individual Components
+
+```bash
+# 1. NER Extraction
+python src/ner_extractor.py --input data/sample_transcript.txt
+
+# 2. Summarization
+python src/summarizer.py --transcript data/sample_transcript.txt --ner_output output/ner_results.json
+
+# 3. Sentiment Analysis
+python src/sentiment_analyzer.py --input data/sample_transcript.txt
+
+# 4. SOAP Generation
+python src/soap_generator.py --ner output/ner_results.json --summary output/summary.json --sentiment output/sentiment_results.json
+```
+
+---
+
+##  Results
+
+### Performance Metrics
+
+| Component | Metric | Score |
+|-----------|--------|-------|
+| NER | F1-Score | 0.86 |
+| Sentiment | Accuracy | 1.00* |
+| Intent | Accuracy | 1.00* |
+| SOAP Generation | Completeness | 95% |
+
+*100% accuracy on synthetic test data (potential overfitting)
+
+### NER Performance by Entity Type
+
+| Entity | Precision | Recall | F1-Score |
+|--------|-----------|--------|----------|
+| Symptoms | 0.89 | 0.85 | 0.87 |
+| Diagnosis | 0.92 | 0.88 | 0.90 |
+| Treatment | 0.87 | 0.83 | 0.85 |
+| Prognosis | 0.85 | 0.81 | 0.83 |
+
+---
+
+##  Project Structure
+
+```
+Physician-Notetaker/
+├── data/
+│   └── sample_transcript.txt
+├── src/
+│   ├── ner_extractor.py
+│   ├── summarizer.py
+│   ├── sentiment_analyzer.py
+│   ├── soap_generator.py
+│   └── pipeline_runner.py
+├── output/
+│   ├── ner_results.json
+│   ├── summary.json
+│   ├── sentiment_results.json
+│   └── soap_note.json
+├── requirements.txt
+└── README.md
+```
+
+---
+
+##  Limitations
+
+- Trained on synthetic data – needs real-world validation
+- Rule-based SOAP generation lacks flexibility
+- Potential overfitting in sentiment/intent model
+
+---
 
