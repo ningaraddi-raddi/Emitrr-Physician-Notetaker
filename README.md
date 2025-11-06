@@ -1,10 +1,10 @@
-# 🩺 Physician Notetaker – AI Medical Documentation System
+#  Physician Notetaker – AI Medical Documentation System
 
 An end-to-end AI pipeline that automatically converts doctor-patient conversations into structured **SOAP notes**, leveraging advanced NLP and transformer-based models for medical text understanding.
 
 ---
 
-## 📘 Table of Contents
+## Table of Contents
 
 1. [Executive Summary](#executive-summary)  
 2. [System Architecture](#system-architecture)  
@@ -19,12 +19,12 @@ An end-to-end AI pipeline that automatically converts doctor-patient conversatio
 
 ---
 
-## 🚀 Executive Summary
+##  Executive Summary
 
 **Physician Notetaker** is an AI-powered medical documentation assistant designed to reduce the burden of manual note-taking in clinical practice.  
 It processes **raw doctor–patient transcripts**, extracts key medical entities, analyzes patient sentiment and intent, and finally generates structured **SOAP notes** ready for use in EHR systems.
 
-### 🧠 Highlights
+###  Highlights
 
 - **Hybrid NER System** – 86% F1-score by combining transformer and rule-based methods  
 - **Multi-Task BioBERT** – Joint sentiment and intent classification  
@@ -32,7 +32,7 @@ It processes **raw doctor–patient transcripts**, extracts key medical entities
 - **Modular Design** – Each component is independent and reusable  
 - **Thorough Evaluation** – Overfitting analysis and model comparison included  
 
-### ⚙️ Tech Stack
+###  Tech Stack
 
 | Component | Technology | Purpose |
 |------------|-------------|----------|
@@ -44,13 +44,13 @@ It processes **raw doctor–patient transcripts**, extracts key medical entities
 
 ---
 
-## 🧩 System Architecture
+##  System Architecture
 
 
 
 ---
 
-## 🧠 Component 1: Named Entity Recognition (NER)
+##  Component 1: Named Entity Recognition (NER)
 
 Medical text is full of abbreviations, domain-specific terms, and conversational expressions.  
 A **hybrid NER** approach captures this complexity using multiple layers:
@@ -62,7 +62,7 @@ A **hybrid NER** approach captures this complexity using multiple layers:
 | Abbreviations | Contextual and regex extraction |
 | Contextual ambiguity | Transformer attention mechanism |
 
-### 🔍 Why BioBERT?
+###  Why BioBERT?
 
 Traditional ML models (Naive Bayes, SVMs, TF-IDF) fail to capture semantics.  
 **BioBERT**, trained on over 470K biomedical papers, understands medical context:
@@ -73,7 +73,7 @@ Traditional ML models (Naive Bayes, SVMs, TF-IDF) fail to capture semantics.
 - NCBI Disease: 89.4% F1  
 - Real-world medical conversations: ~86% F1  
 
-### 🧰 Rule-Based and Regex Layer
+###  Rule-Based and Regex Layer
 
 spaCy’s `Matcher` and regex patterns handle conversational phrases like:
 - “feeling dizzy”, “having trouble sleeping”
@@ -84,7 +84,7 @@ This ensures comprehensive coverage of both clinical and everyday medical langua
 
 ---
 
-## 🩹 Component 2: Medical Summary Generation
+##  Component 2: Medical Summary Generation
 
 **Goal:** Convert raw NER output into a concise, clinically meaningful summary.
 
@@ -104,6 +104,7 @@ This ensures comprehensive coverage of both clinical and everyday medical langua
   "Prognosis": "Full recovery expected within 6 months"
 }
 
+---
 
 # Component 3: Named Entity Recognition (NER) Extractor
 # ------------------------------------------------------
@@ -126,6 +127,7 @@ python src/ner_extractor.py --input data/sample_transcript.txt
 # - Uses scispaCy / BioClinicalBERT for medical entity recognition
 # - Handles missing or ambiguous data automatically
 # - Output is saved as JSON for use by other pipeline components
+---
 
 
 # Component 4: Medical Summarizer
@@ -147,6 +149,7 @@ python src/summarizer.py --transcript data/sample_transcript.txt --ner_output da
 # - Handles incomplete or uncertain information contextually
 # - Output is a human-readable summary used by the SOAP generator
 
+---
 
 # Component 5: Pipeline Runner
 # ----------------------------
