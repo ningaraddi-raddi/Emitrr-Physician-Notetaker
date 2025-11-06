@@ -56,9 +56,9 @@ Doctor-Patient Transcript
          ↓
     SOAP Note Output
 
-
- Key Components
-1. Named Entity Recognition (NER)
+```
+## Key Components
+# 1. Named Entity Recognition (NER)
 BioBERT Transformer – Pre-trained on 470K+ medical papers
 
 scispaCy – Rule-based pattern matching with 100K+ medical terms
@@ -67,7 +67,8 @@ Regex Patterns – Extract measurements, dates, and quantities
 
 Output: Symptoms, Diagnosis, Treatment, Prognosis
 
-2. Medical Summary Generation
+
+# 2. Medical Summary Generation
 Deduplicates and cleans extracted entities
 
 Extracts patient information using regex
@@ -76,7 +77,7 @@ Maps entities to medical categories
 
 Output: Structured JSON summary
 
-3. Sentiment & Intent Analysis
+# 3. Sentiment & Intent Analysis
 Multi-task BioBERT classifier with two heads:
 
 Sentiment: Anxious / Neutral / Reassured
@@ -87,7 +88,7 @@ Fine-tuned on domain-relevant conversation samples
 
 Output: Patient emotional state and conversation intent
 
-4. SOAP Note Generation
+# 4. SOAP Note Generation
 S (Subjective): Patient complaints & history
 
 O (Objective): Doctor observations & exam findings
@@ -98,7 +99,8 @@ P (Plan): Treatment & follow-up recommendations
 
 Output: Clinical SOAP note in JSON format
 
- Tech Stack
+---
+# Tech Stack
 Component	Technology	Purpose
 NER	BioBERT (d4data/biomedical-ner-all)	Medical entity extraction
 Secondary NER	scispaCy (en_core_sci_md)	Rule-based patterns
@@ -106,14 +108,15 @@ Sentiment/Intent	Fine-tuned BioBERT	Emotion & intent classification
 Framework	HuggingFace Transformers, PyTorch	Deep learning
 NLP Tools	spaCy 3.7+	Text processing
 
- Why Pretrained Models Are Used
+---
+# Why Pretrained Models Are Used
 We adopted pretrained biomedical transformers like BioBERT and scispaCy because medical NLP tasks require understanding highly domain-specific language and terminology that are not captured by general NLP models.
 Training from scratch would demand millions of medical records and heavy computation.
 
 By using pretrained models, we leverage transfer learning, where models trained on vast biomedical literature already understand the context of clinical language.
 Fine-tuning them on smaller, task-specific datasets provides strong performance even with limited labeled data.
 
-Key Reasons
+# Key Reasons
  Domain-Specific Vocabulary: Medical dialogues include terms and abbreviations like HbA1c, BP, dyspnea, metformin, etc., which pretrained biomedical models already understand.
 
  Reduced Training Cost: Avoids training from scratch, saving time and compute resources.
@@ -122,7 +125,7 @@ Key Reasons
 
  Transfer Learning Advantage: Pretrained biomedical models generalize better on unseen medical conversations.
 
-Summary
+# Summary
 Task	Model Used	Purpose
 NER Extraction	BioBERT (d4data/biomedical-ner-all)	Extracts entities like Symptoms, Diagnosis, and Treatment
 Supplementary NER	scispaCy (en_core_sci_md)	Enhances coverage through rule-based medical term matching
@@ -133,29 +136,34 @@ Note: Evaluation metrics have been intentionally excluded.
 The focus of this version is to demonstrate a functioning AI documentation pipeline, not model benchmarking.
 Future iterations will include validation on real-world doctor-patient datasets.
 
- Installation
+# Installation
 Step 1: Clone Repository
-bash
-Copy code
+
+```
 git clone https://github.com/yourusername/Physician-Notetaker.git
 cd Physician-Notetaker
+```
+
 Step 2: Create Virtual Environment
-bash
-Copy code
+```
 python -m venv venv
 source venv/bin/activate      # macOS/Linux
 venv\Scripts\activate         # Windows
+```
+
 Step 3: Install Dependencies
-bash
-Copy code
+```
 pip install -r requirements.txt
+```
+
 Step 4: Download Models
-bash
-Copy code
+```
 python -m spacy download en_core_web_sm
 python -m spacy download en_core_sci_md
 python -m spacy validate
- Usage
+```
+
+# Usage
 Run Full Pipeline
 bash
 Copy code
@@ -170,9 +178,7 @@ output/sentiment_results.json – Sentiment/intent
 
 output/soap_note.json – Final SOAP note
 
-Run Individual Components
-bash
-Copy code
+
 # 1. NER Extraction
 python src/ner_extractor.py --input data/sample_transcript.txt
 
@@ -204,7 +210,7 @@ Physician-Notetaker/
 ├── requirements.txt
 └── README.md
 
- Limitations
+# Limitations
 Current models trained/fine-tuned on synthetic or limited data
 
 Rule-based SOAP generation may lack flexibility for complex cases
