@@ -51,6 +51,7 @@ It processes **raw doctor–patient transcripts**, extracts key medical entities
 The **Physician Notetaker** system follows a **modular NLP pipeline architecture**.  
 Each component is independent yet connected sequentially to ensure accurate and structured medical documentation from raw doctor–patient transcripts.
 
+
 ```text
 ┌────────────────────────┐
 │  Doctor–Patient Input  │
@@ -84,6 +85,7 @@ Each component is independent yet connected sequentially to ensure accurate and 
 ┌────────────────────────┐
 │  5. Output (JSON/Text) │  → Saved in /output/soap_note.json  
 └────────────────────────┘
+
 
 
 # Data Flow Summary:
