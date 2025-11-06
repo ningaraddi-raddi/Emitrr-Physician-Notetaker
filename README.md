@@ -1,10 +1,10 @@
-# 🩺 Physician Notetaker – AI Medical Documentation System
+#  Physician Notetaker – AI Medical Documentation System
 
 An end-to-end AI pipeline that automatically converts doctor-patient conversations into structured **SOAP notes** using NLP and transformer-based models.
 
 ---
 
-## 📘 Table of Contents
+##  Table of Contents
 
 1. [Overview](#overview)  
 2. [System Architecture](#system-architecture)  
@@ -19,21 +19,21 @@ An end-to-end AI pipeline that automatically converts doctor-patient conversatio
 
 ---
 
-## 🩺 Overview
+##  Overview
 
 **Physician Notetaker** automates medical documentation by processing raw doctor-patient transcripts and generating structured SOAP notes.  
 The system uses a hybrid approach combining **BioBERT transformers** with **rule-based NLP methods**.
 
 ### Key Features
 
-- 🧠 **Hybrid NER System** – Combines BioBERT + scispaCy for robust entity extraction  
-- 💬 **Multi-Task Learning** – Joint sentiment and intent classification  
-- 📋 **Auto SOAP Notes** – Structured clinical documentation  
-- ⚙️ **Modular Pipeline** – Independent, reusable components  
+-  **Hybrid NER System** – Combines BioBERT + scispaCy for robust entity extraction  
+-  **Multi-Task Learning** – Joint sentiment and intent classification  
+-  **Auto SOAP Notes** – Structured clinical documentation  
+-  **Modular Pipeline** – Independent, reusable components  
 
 ---
 
-## 🧩 System Architecture
+##  System Architecture
 
 ```text
 Doctor-Patient Transcript
@@ -55,7 +55,9 @@ Doctor-Patient Transcript
 └────────────────────────┘
          ↓
     SOAP Note Output
-🧠 Key Components
+
+
+ Key Components
 1. Named Entity Recognition (NER)
 BioBERT Transformer – Pre-trained on 470K+ medical papers
 
@@ -96,7 +98,7 @@ P (Plan): Treatment & follow-up recommendations
 
 Output: Clinical SOAP note in JSON format
 
-⚙️ Tech Stack
+ Tech Stack
 Component	Technology	Purpose
 NER	BioBERT (d4data/biomedical-ner-all)	Medical entity extraction
 Secondary NER	scispaCy (en_core_sci_md)	Rule-based patterns
@@ -104,7 +106,7 @@ Sentiment/Intent	Fine-tuned BioBERT	Emotion & intent classification
 Framework	HuggingFace Transformers, PyTorch	Deep learning
 NLP Tools	spaCy 3.7+	Text processing
 
-🧠 Why Pretrained Models Are Used
+ Why Pretrained Models Are Used
 We adopted pretrained biomedical transformers like BioBERT and scispaCy because medical NLP tasks require understanding highly domain-specific language and terminology that are not captured by general NLP models.
 Training from scratch would demand millions of medical records and heavy computation.
 
@@ -112,13 +114,13 @@ By using pretrained models, we leverage transfer learning, where models trained 
 Fine-tuning them on smaller, task-specific datasets provides strong performance even with limited labeled data.
 
 Key Reasons
-🩸 Domain-Specific Vocabulary: Medical dialogues include terms and abbreviations like HbA1c, BP, dyspnea, metformin, etc., which pretrained biomedical models already understand.
+ Domain-Specific Vocabulary: Medical dialogues include terms and abbreviations like HbA1c, BP, dyspnea, metformin, etc., which pretrained biomedical models already understand.
 
-💰 Reduced Training Cost: Avoids training from scratch, saving time and compute resources.
+ Reduced Training Cost: Avoids training from scratch, saving time and compute resources.
 
-🧩 Improved Contextual Understanding: BioBERT captures relationships between symptoms, diagnoses, and treatments with contextual accuracy.
+ Improved Contextual Understanding: BioBERT captures relationships between symptoms, diagnoses, and treatments with contextual accuracy.
 
-🔁 Transfer Learning Advantage: Pretrained biomedical models generalize better on unseen medical conversations.
+ Transfer Learning Advantage: Pretrained biomedical models generalize better on unseen medical conversations.
 
 Summary
 Task	Model Used	Purpose
@@ -131,7 +133,7 @@ Note: Evaluation metrics have been intentionally excluded.
 The focus of this version is to demonstrate a functioning AI documentation pipeline, not model benchmarking.
 Future iterations will include validation on real-world doctor-patient datasets.
 
-🧰 Installation
+ Installation
 Step 1: Clone Repository
 bash
 Copy code
@@ -153,7 +155,7 @@ Copy code
 python -m spacy download en_core_web_sm
 python -m spacy download en_core_sci_md
 python -m spacy validate
-▶️ Usage
+ Usage
 Run Full Pipeline
 bash
 Copy code
@@ -182,7 +184,7 @@ python src/sentiment_analyzer.py --input data/sample_transcript.txt
 
 # 4. SOAP Generation
 python src/soap_generator.py --ner output/ner_results.json --summary output/summary.json --sentiment output/sentiment_results.json
-📁 Project Structure
+ Project Structure
 pgsql
 Copy code
 Physician-Notetaker/
@@ -201,7 +203,8 @@ Physician-Notetaker/
 │   └── soap_note.json
 ├── requirements.txt
 └── README.md
-⚠️ Limitations
+
+ Limitations
 Current models trained/fine-tuned on synthetic or limited data
 
 Rule-based SOAP generation may lack flexibility for complex cases
